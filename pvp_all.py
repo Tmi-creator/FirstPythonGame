@@ -17,28 +17,29 @@ units = {
 }
 
 
-def Pvp_all(c):
+def pvp_all(list_all):
     p = {}
-    n1 = sum(c)
+    number_all = sum(list_all)
     teams = []
     print(
         "Воин-1\nМаг-2\nРазбойник-3\nПаладин-4\nОхотник-5\nЧернокнижник-6\nШаман-7\nДруид-8\nЖрец-9\n")
-    for i in range(n1):
+    for i in range(number_all):
         choice1 = int(input())
         while choice1 not in units:
             print("Incorrect choice.")
             choice1 = int(input())
         p[i + 1] = units[choice1]()
     cnt = 1
-    for i in range(len(c)):
+    for i in range(len(list_all)):
         a = []
-        for i2 in range(c[i]):
+        for i2 in range(list_all[i]):
             a.append(p[cnt])
             cnt += 1
-        teams.append(a)
+    # a = [p[cnt + 1] for cnt, i2 in enumerate(list_all)]
+    teams.append(a)
     choice = True
     alive = [True] * len(teams)
-    ii = 0
+    team_alive = 0
     while choice:
         cnt = 0
         for i in range(1, 1 + len(teams)):
@@ -71,11 +72,11 @@ def Pvp_all(c):
                         alive[i] = True
                         break
             if alive[i]:
-                ii = i
+                team_alive = i
                 cnt += 1
         if cnt == 1:
             choice = False
-            print(f'team {ii + 1} wins! gg all!')
+            print(f'team {team_alive + 1} wins! gg all!')
         if cnt == 0:
             choice = False
             print("That's a draw! Good game!")
